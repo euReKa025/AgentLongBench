@@ -54,7 +54,7 @@ Each JSONL file contains a single standardized `question_type` only.
 
 ## Benchmark download
 
-The `benchmark/` directory is large and not included in the repository. Use the provided download link
+The `benchmark/` directory is large and not included in the repository. Use the provided download link https://huggingface.co/datasets/ign1s/AgentLongBench
 to fetch the dataset and place it under `agentlong_bench/benchmark/`.
 
 ## Key scripts
