@@ -7,14 +7,14 @@ export VLLM_ALLOW_LONG_MAX_MODEL_LEN=1
 # ============================================
 # DEFAULT PARAMETERS
 # ============================================
-DATASET="/inspire/hdd/project/exploration-topic/fangshicheng-CZXS24250043/agentlong_bench/benchmark/ki-c/1M/tool_response/find_target_offsets_tool.jsonl"
-OUTPUT="./output/vllm/pred_1m.jsonl"
-MODEL_NAME="Qwen2.5-7B-Instruct-1M-test"
+DATASET=""
+OUTPUT=""
+MODEL_NAME=""
 LIMIT=""
 
 # vLLM Defaults
-MODEL_PATH="/inspire/hdd/project/exploration-topic/public/downloaded_ckpts/Qwen2.5-7B-Instruct-1M"
-TOKENIZER="/inspire/hdd/project/exploration-topic/public/downloaded_ckpts/Qwen2.5-7B-Instruct-1M"
+MODEL_PATH=""
+TOKENIZER=""
 MAX_NEW_TOKENS=4096
 TEMP=0.7
 TOP_P=0.9
