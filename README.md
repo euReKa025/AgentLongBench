@@ -74,7 +74,18 @@ Each line includes:
 - `raw_response` (model text)
 - optional `round`, `i_round`, `j_round` if present in the dataset
 
-## Notes
+## Quickstart
 
-- Prompting logic is aligned with the original task definitions, selected by knowledge type.
-- Evaluation expects one standardized `question_type` per dataset file.
+From the `AgentLongBench` repository root, run a single-file eval (online
+API runner) using the provided helper script:
+
+```bash
+bash scripts/eval_one.sh
+```
+
+Run a single-file offline vLLM evaluation:
+
+```bash
+bash scripts/run_vllm_one.sh
+```
+
