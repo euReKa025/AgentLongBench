@@ -27,6 +27,16 @@
 
 ---
 
+## 🏆 Main Results
+
+Below is the performance heatmap for the **Knowledge-Intensive & Concise-Response** setting. For full results, please refer to our [Paper](./agentlongbench.pdf).
+
+<p align="center">
+  <img src="en_intersection.png" width="90%" alt="Main Heatmap" />
+</p>
+
+---
+
 ## 📂 Dataset & Labels
 
 ### 1. Standard Labels
@@ -65,8 +75,6 @@ benchmark/
             └── final_guess/
                  └── intersection.jsonl
 ```
-
-## Quickstart
 
 
 
