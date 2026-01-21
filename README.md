@@ -1,80 +1,96 @@
-# AgentLongBench
+<div align="center">
 
-Unified benchmark and evaluation codebase for AgentLong, standardizing labels and data layout.
-This folder is standalone.
+# AgentLongBench: A Controllable Benchmark for Long-Context Agents
 
-## What this contains
+### 📄 [**Read Paper (PDF)**](./agentlongbench.pdf) ｜ 🤗 [**HuggingFace Dataset**](https://huggingface.co/datasets/ignis/AgentLongBench) ｜ 🌐 [**Project Page**](https://github.com/euReKa025/AgentLongBench)
 
-- `benchmark/`: standardized datasets organized by knowledge type + history type + length + category.
-- `eval/`: single entry run/evaluate logic using standardized labels.
-- `vllm_offline/`: unified offline runner for vLLM.
-- `scripts/`: conversion and helper scripts.
-- `models/`: copied model registry/configs used by the runner.
+*⚠️ **Note**: The paper is currently on hold on arXiv. A full PDF copy (`agentlongbench.pdf`) is provided in this repository for reference.*
 
-## Standard labels (paper format)
+</div>
 
-Knowledge types:
-- `ki` -> knowledge_intensive
-- `kf` -> knowledge_free
+<br>
 
-History types:
-- `c` -> Concise-Response
-- `v` -> Verbose-Response
+> **AgentLongBench** is the first benchmark designed to evaluate **Long-Context Agents** through simulated environment rollouts. Unlike traditional retrieval benchmarks, it assesses an agent's ability to perform **dynamic information synthesis**, **state tracking**, and **non-linear reasoning** across contexts ranging from **32K to 4M tokens**.
 
-Question types:
-- Count Frequency(Tool)
-- Find Duplicates(Tool)
-- Find Target Offsets(Tool)
-- Count Correctness(Env)
-- Count Frequency(Env)
-- Find Round with Largest Value(Env)
-- Weighted Summation(Env)
-- Intersection
+---
 
-Categories:
-- Tool Response: Count Frequency(Tool), Find Duplicates(Tool), Find Target Offsets(Tool)
-- Env Response: Count Correctness(Env), Count Frequency(Env), Find Round with Largest Value(Env), Weighted Summation(Env)
-- Final Guess: Intersection
+## 🚀 Key Features
 
-## Data layout
+- **Dynamic Interaction**: Evaluates agents via "Environment Rollouts" based on Lateral Thinking Puzzles, moving beyond static document QA.
+- **Extreme Context Length**: Supports scalable context evaluation from **32K** up to **4M tokens**.
+- **Controllable Difficulty**:
+    - **Knowledge-Intensive (KI)**: Uses real-world entities (Pokémon) to test parametric memory.
+    - **Knowledge-Free (KF)**: Uses symbolic masking to strictly test in-context reasoning.
+- **Information Density Tests**:
+    - **Concise-Response**: Hundreds of interaction rounds, testing memory fragmentation.
+    - **Verbose-Response**: High-density tool logs, testing needle-in-noise retrieval.
 
-```
+---
+
+## 📂 Dataset & Labels
+
+### 1. Standard Labels
+We use standardized abbreviations in file paths and logs to distinguish settings.
+
+| Dimension | Label | Full Name | Description |
+| :--- | :--- | :--- | :--- |
+| **Knowledge** | `ki` | Knowledge Intensive | Relies on external knowledge (e.g., Pokémon names). |
+| | `kf` | Knowledge Free | Abstract entities (e.g., `Item_84`) to isolate reasoning. |
+| **History** | `c` | Concise-Response | Filtered tool outputs; creates long interaction chains. |
+| | `v` | Verbose-Response | Raw/Noisy tool outputs; tests info filtering. |
+
+### 2. Task Taxonomy
+[cite_start]Tasks are categorized by the information source required to answer[cite: 176].
+
+| Category | Tasks | Description |
+| :--- | :--- | :--- |
+| **🛠️ Tool Response** | `Count Frequency`, `Find Duplicates`, `Find Target Offsets` | Requires parsing precise details from machine-generated logs. |
+| **🌍 Env Response** | `Count Correctness`, `Count Frequency`, `Find Round with Largest Value`, `Weighted Summation` | Requires tracking state changes and feedback constraints. |
+| **🧠 Final Guess** | `Intersection` | The ultimate test of global understanding and logical deduction. |
+
+### 3. Data Layout
+The dataset structure is organized by **Setting** $\rightarrow$ **Length** $\rightarrow$ **Category**.
+
+```text
 benchmark/
-  ki-c/ or ki-v/ or kf-c/ or kf-v/
-    <length>/
-      tool_response/
-        <question_type_slug>.jsonl
-      env_response/
-        <question_type_slug>.jsonl
-      final_guess/
-        <question_type_slug>.jsonl
+  ├── ki-c/                  # Knowledge Intensive + Concise
+  ├── ki-v/                  # Knowledge Intensive + Verbose
+  ├── kf-c/                  # Knowledge Free + Concise
+  └── kf-v/                  # Knowledge Free + Verbose
+       └── <length>/         # e.g., 128k, 1M, 4M
+            ├── tool_response/
+            │    └── <question_type>.jsonl
+            ├── env_response/
+            │    └── <question_type>.jsonl
+            └── final_guess/
+                 └── intersection.jsonl
 ```
-
-Each JSONL file contains a single standardized `question_type` only.
-
-## Benchmark download
-
-The `benchmark/` directory is large and not included in the repository. Use the provided download link https://huggingface.co/datasets/ign1s/AgentLongBench
-to fetch the dataset and place it under `agentlong_bench/benchmark/`.
-
-## Key scripts
-
-- `scripts/convert_benchmark.py` converts raw benchmark data into the standardized layout under
-  `agentlong_bench/benchmark`.
-- `eval/run.py` runs inference for a single standardized dataset file (online API runner).
-- `eval/evaluate.py` evaluates a single dataset file and its predictions.
-- `vllm_offline/run.py` runs offline inference with vLLM for a single dataset file.
-
-## Prediction format (output JSONL)
-
-Each line includes:
-- `id`, `sample_id`, `question_type`
-- `pred_answer` (parsed prediction)
-- `parse_kind` (parser tag)
-- `raw_response` (model text)
-- optional `round`, `i_round`, `j_round` if present in the dataset
 
 ## Quickstart
+
+
+
+
+### 📥 Download
+
+The dataset is not included in the repo due to size. Please download it from Hugging Face and place it under `agentlong_bench/benchmark/`:
+
+```bash
+# Example structure after download
+agentlong_bench/benchmark/ki-c/...
+
+```
+
+---
+
+## ⚡ Quick Start
+
+### Prerequisites
+
+* Python 3.8+
+* vLLM (for offline inference)
+
+### Running Evaluation
 
 From the `AgentLongBench` repository root, run a single-file eval (online
 API runner) using the provided helper script:
@@ -88,4 +104,6 @@ Run a single-file offline vLLM evaluation:
 ```bash
 bash scripts/run_vllm_one.sh
 ```
+
+
 
