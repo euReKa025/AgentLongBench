@@ -2,9 +2,7 @@
 
 # AgentLongBench: A Controllable Benchmark for Long-Context Agents
 
-### 📄 [**Read Paper (PDF)**](./agentlongbench.pdf) ｜ 🤗 [**HuggingFace Dataset**](https://huggingface.co/datasets/ignis/AgentLongBench) ｜ 🌐 [**Project Page**](https://github.com/euReKa025/AgentLongBench)
-
-*⚠️ **Note**: The paper is currently on hold on arXiv. A full PDF copy (`agentlongbench.pdf`) is provided in this repository for reference.*
+### 📄 [**Read Paper**](https://arxiv.org/abs/2601.20730) ｜ 🤗 [**HuggingFace Dataset**](https://huggingface.co/datasets/ignis/AgentLongBench) ｜ 🌐 [**Project Page**](https://github.com/euReKa025/AgentLongBench)
 
 </div>
 
@@ -111,6 +109,21 @@ Run a single-file offline vLLM evaluation:
 
 ```bash
 bash scripts/run_vllm_one.sh
+```
+
+## 📝 Citation
+If you find this work useful, please cite our paper:
+
+```bibtex
+@misc{fang2026agentlongbenchcontrollablelongbenchmark,
+      title={AgentLongBench: A Controllable Long Benchmark For Long-Contexts Agents via Environment Rollouts}, 
+      author={Shicheng Fang and Yuxin Wang and XiaoRan Liu and Jiahao Lu and Chuanyuan Tan and Xinchi Chen and Yining Zheng. Xuanjing Huang and Xipeng Qiu},
+      year={2026},
+      eprint={2601.20730},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2601.20730}, 
+}
 ```
 
 
