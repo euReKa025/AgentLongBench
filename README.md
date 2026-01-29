@@ -2,7 +2,7 @@
 
 # AgentLongBench: A Controllable Benchmark for Long-Context Agents
 
-### 📄 [**Read Paper**](https://arxiv.org/abs/2601.20730) ｜ 🤗 [**HuggingFace Dataset**](https://huggingface.co/datasets/ignis/AgentLongBench) ｜ 🌐 [**Project Page**](https://github.com/euReKa025/AgentLongBench)
+### 📄 [**Read Paper**](https://arxiv.org/abs/2601.20730) ｜ 🤗 [**HuggingFace Dataset**](https://huggingface.co/datasets/ign1s/AgentLongBench) ｜ 🌐 [**Project Page**](https://github.com/euReKa025/AgentLongBench)
 
 </div>
 
